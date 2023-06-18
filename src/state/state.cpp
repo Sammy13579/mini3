@@ -11,9 +11,82 @@
  * 
  * @return int 
  */
-int State::evaluate(){
+int State::evaluate(int we){
   // [TODO] design your own evaluation function
-  return 0;
+  int my,oppo;
+  int myvalue=0;
+  int oppovalue=0;
+  auto self_board = this->board.board[we];
+  auto oppn_board = this->board.board[1 - we];
+  for(int i=0;i<BOARD_H;i++)
+  {
+    for(int j=0;j<BOARD_W;j++)
+    {
+        if(my=self_board[i][j])
+        {
+          switch(my){
+            case 1://兵
+              myvalue+=1;
+              break;
+
+            case 2://車
+              myvalue+=5;
+              break;
+
+            case 3://馬
+              myvalue+=3;
+              break;
+
+            case 4://象
+              myvalue+=4;
+              break;
+
+            case 5://queen
+              myvalue+=9;
+              break;
+
+            case 6://king
+              myvalue+=1000000;
+              break;
+
+            default:
+              break;
+          }
+        }
+        if(oppo=oppn_board[i][j])
+        {
+          switch(oppo){
+            case 1://兵
+              oppovalue+=1;
+              break;
+
+            case 2://車
+              oppovalue+=5;
+              break;
+
+            case 3://馬
+              oppovalue+=3;
+              break;
+
+            case 4://象
+              oppovalue+=4;
+              break;
+
+            case 5://queen
+              oppovalue+=9;
+              break;
+
+            case 6://king
+              oppovalue+=1000000;
+              break;
+
+            default:
+              break;
+          }
+        }
+    }
+  }
+  return myvalue-oppovalue;
 }
 
 

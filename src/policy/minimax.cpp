@@ -26,26 +26,60 @@ Move Minimax::get_move(State *state, int depth){
     auto acttwo=postatetwo->legal_actions;
     int postwo=acttwo.size();
     int lvtwo=3000000;
-    for(int j=0;j<postwo;j++)
+    if(depth<2)
     {
-      auto postatethree=postatetwo->next_state(acttwo[j]);
-      auto actthree=postatethree->legal_actions;
-      int posthree=actthree.size();
-      int lvthree=-3000000;
-      for(int k=0;k<posthree;k++)
+      lvtwo=postatetwo->evaluate(we);
+    }
+    else
+    {
+      for(int j=0;j<postwo;j++)
       {
-        auto postatefour=postatethree->next_state(actthree[k]);
-        int lvfour=postatefour->evaluate(we);
-        if(lvfour>lvthree)
+        auto postatethree=postatetwo->next_state(acttwo[j]);
+        auto actthree=postatethree->legal_actions;
+        int posthree=actthree.size();
+        int lvthree=-3000000;
+        if(depth<3)
         {
-          lvthree=lvfour;
+          lvthree=postatethree->evaluate(we);
+        }
+        else
+        {
+          for(int k=0;k<posthree;k++)
+          {
+            auto postatefour=postatethree->next_state(actthree[k]);
+            auto actfour=postatefour->legal_actions;
+            int posfour=actfour.size();
+            int lvfour=3000000;
+            if(depth<4)
+            {
+              lvfour=postatefour->evaluate(we);
+            }
+            else
+            {
+              for(int l=0;l<posfour;l++)
+              {
+                auto postatefive=postatefour->next_state(actfour[l]);
+                int lvfive=postatefive->evaluate(we);
+                if(lvfive<lvfour)
+                {
+                  lvfour=lvfive;
+                }
+              }
+            }
+            if(lvfour>lvthree)
+            {
+              lvthree=lvfour;
+            }
+          }
+        }
+        
+        if(lvthree<lvtwo)
+        {
+          lvtwo=lvthree;
         }
       }
-      if(lvthree<lvtwo)
-      {
-        lvtwo=lvthree;
-      }
     }
+    
     if(lvtwo>lvone)
     {
       lvone=lvtwo;

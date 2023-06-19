@@ -26,23 +26,60 @@ int State::evaluate(int we){
         {
           switch(my){
             case 1://兵
-              myvalue+=1;
+              if(i-1>=0 && self_board[i-1][j]==1)//重兵
+              {
+                myvalue+=2;
+              }
+              else if(i+1<BOARD_H && self_board[i+1][j]==1)//重兵
+              {
+                myvalue+=2;
+              }
+              else if(j==0 || j==BOARD_W-1)//邊兵
+              {
+                myvalue+=3;
+              }
+              else if(j-1>=0&&self_board[i][j-1]==1)//並兵
+              {
+                myvalue+=5;
+              }
+              else if(j+1<BOARD_W && self_board[i][j+1]==1)//並兵
+              {
+                myvalue+=5;
+              }
+              else
+              {
+                myvalue+=4;
+              }
               break;
 
             case 2://車
-              myvalue+=5;
+              myvalue+=20;
               break;
 
             case 3://馬
-              myvalue+=3;
+              if(j==0 || j==BOARD_W-1)//邊馬
+              {
+                myvalue+=10;
+              }
+              else
+              {
+                myvalue+=12;
+              }
               break;
 
             case 4://象
-              myvalue+=4;
+              if(j==0 || j==BOARD_W-1)//邊象
+              {
+                myvalue+=9;
+              }
+              else
+              {
+                myvalue+=10;
+              }
               break;
 
             case 5://queen
-              myvalue+=9;
+              myvalue+=36;
               break;
 
             case 6://king
@@ -57,23 +94,60 @@ int State::evaluate(int we){
         {
           switch(oppo){
             case 1://兵
-              oppovalue+=1;
+              if(i-1>=0 && oppn_board[i-1][j]==1)//重兵
+              {
+                oppovalue+=2;
+              }
+              else if(i+1<BOARD_H && oppn_board[i+1][j]==1)//重兵
+              {
+                oppovalue+=2;
+              }
+              else if(j==0 || j==BOARD_W-1)//邊兵
+              {
+                oppovalue+=3;
+              }
+              else if(j-1>=0&&oppn_board[i][j-1]==1)//並兵
+              {
+                oppovalue+=5;
+              }
+              else if(j+1<BOARD_W && oppn_board[i][j+1]==1)//並兵
+              {
+                oppovalue+=5;
+              }
+              else
+              {
+                oppovalue+=4;
+              }
               break;
 
             case 2://車
-              oppovalue+=5;
+              oppovalue+=20;
               break;
 
             case 3://馬
-              oppovalue+=3;
+              if(j==0 || j==BOARD_W-1)//邊馬
+              {
+                oppovalue+=10;
+              }
+              else
+              {
+                oppovalue+=12;
+              }
               break;
 
             case 4://象
-              oppovalue+=4;
+              if(j==0 || j==BOARD_W-1)//邊象
+              {
+                oppovalue+=9;
+              }
+              else
+              {
+                oppovalue+=10;
+              }
               break;
 
             case 5://queen
-              oppovalue+=9;
+              oppovalue+=36;
               break;
 
             case 6://king

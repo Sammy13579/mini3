@@ -83,7 +83,51 @@ Move Alphabeta::get_move(State *state, int depth){
                       for(int n=0;n<possix;n++)
                       {
                         auto postateseven=postatesix->next_state(actsix[n]);
-                        int lvseven=postateseven->evaluate(we);
+                        auto actseven=postateseven->legal_actions;
+                        int posseven=actseven.size();
+                        int lvseven=-3000000;
+                        if(depth<7)
+                        {
+                          lvseven=postateseven->evaluate(we);
+                        }
+                        else
+                        {
+                          for(int o=0;o<posseven;o++)
+                          {
+                            auto postateeight=postateseven->next_state(actseven[o]);
+                            auto acteight=postateeight->legal_actions;
+                            int poseight=acteight.size();
+                            int lveight=3000000;
+                            if(depth<8)
+                            {
+                              lveight=postateeight->evaluate(we);
+                            }
+                            else
+                            {
+                              for(int p=0;p<poseight;p++)
+                              {
+                                auto postatenine=postateeight->next_state(acteight[p]);
+                                int lvnine=postatenine->evaluate(we);
+                                if(lvnine<lveight)
+                                {
+                                  lveight=lvnine;
+                                }
+                                if(o&&lvnine<=lvseven)
+                                {
+                                  break;
+                                }
+                              }
+                            }
+                            if(lveight>lvseven)
+                            {
+                              lvseven=lveight;
+                            }
+                            if(n&&lveight>=lvsix)
+                            {
+                              break;
+                            }
+                          }
+                        }
                         if(lvseven<=lvsix)
                         {
                           lvsix=lvseven;

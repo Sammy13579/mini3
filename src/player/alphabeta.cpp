@@ -41,7 +41,7 @@ void read_board(std::ifstream& fin) {
 void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
   int depth=1;
-  while(depth<7) {
+  while(depth<9) {
     // Choose a random spot.
     auto move = Alphabeta::get_move(root, depth);
     fout << move.first.first << " " << move.first.second << " "\

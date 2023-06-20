@@ -50,6 +50,14 @@ int State::evaluate(int we){
               {
                 myvalue+=4;
               }
+              if(we&&i>=BOARD_H-2)//升變
+              {
+                myvalue++;
+              }
+              if(!we&&i<2)//升變
+              {
+                myvalue++;
+              }
               break;
 
             case 2://車
@@ -59,7 +67,7 @@ int State::evaluate(int we){
             case 3://馬
               if(j==0 || j==BOARD_W-1)//邊馬
               {
-                myvalue+=10;
+                myvalue+=11;
               }
               else
               {
@@ -118,6 +126,14 @@ int State::evaluate(int we){
               {
                 oppovalue+=4;
               }
+              if(!we&&i>=BOARD_H-2)//升變
+              {
+                oppovalue++;
+              }
+              if(we&&i<2)//升變
+              {
+                oppovalue++;
+              }
               break;
 
             case 2://車
@@ -127,7 +143,7 @@ int State::evaluate(int we){
             case 3://馬
               if(j==0 || j==BOARD_W-1)//邊馬
               {
-                oppovalue+=10;
+                oppovalue+=11;
               }
               else
               {

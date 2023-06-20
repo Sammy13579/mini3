@@ -128,7 +128,7 @@ Move Alphabeta::get_move(State *state, int depth){
                             }
                           }
                         }
-                        if(lvseven<=lvsix)
+                        if(lvseven<lvsix)
                         {
                           lvsix=lvseven;
                         }
@@ -138,7 +138,7 @@ Move Alphabeta::get_move(State *state, int depth){
                         }
                       }
                     }
-                    if(lvsix>=lvfive)
+                    if(lvsix>lvfive)
                     {
                       lvfive=lvsix;
                     }
@@ -148,7 +148,7 @@ Move Alphabeta::get_move(State *state, int depth){
                     }
                   }
                 }
-                if(lvfive<=lvfour)
+                if(lvfive<lvfour)
                 {
                   lvfour=lvfive;
                 }
